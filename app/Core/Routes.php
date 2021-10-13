@@ -4,8 +4,9 @@ $router->add('/', function() {
     return 'Hello homepage';
 }, "GET");
 
-$router->add('/test', function() {
-    return 'Hello test';
+$router->add('/productlist', function() {
+    $productListController = new \Controllers\ProductListController();
+    $productListController::view();
 }, "GET");
 
 $router->add('/product/{id}', function($params) {

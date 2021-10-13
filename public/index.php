@@ -5,6 +5,7 @@ use Core\Autoloader;
 use Core\Request;
 use Core\Router;
 
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/../app/Core/Autoloader.php');
 require_once($_SERVER['DOCUMENT_ROOT'] . "/../app/Setup/Setup.php");
 
