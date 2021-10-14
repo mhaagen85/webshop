@@ -23,7 +23,7 @@ class Router
     public static function load($file)
     {
         $router = New static;
-        require_once $file;
+        require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'Core/' . $file;
 
         return $router;
     }

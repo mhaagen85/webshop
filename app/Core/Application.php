@@ -30,7 +30,7 @@ class Application
     )
     {
         $this->request = $request;
-        $this->router = Router::load('routes.php');
+        $this->router = Router::load('Routes.php');
     }
     
     /**
