@@ -29,8 +29,9 @@ class LoginController extends AbstractController
         if ($this->conn->query("SELECT * FROM Users WHERE username ='".$username."'")->num_rows == 0) {
             $this->redirect('register');
         }
-    
+
         $_SESSION["username"] = $_POST['username'];
+
         $this->redirect('productlist');
     }
 }
