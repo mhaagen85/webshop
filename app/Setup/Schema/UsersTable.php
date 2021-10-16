@@ -2,15 +2,15 @@
 
 use Core\DbConnection;
 
-$mysqli = New DbConnection();
+$mysqli = DbConnection::getConn();
 
-if ($mysqli->conn->query("CREATE TABLE IF NOT EXISTS Users(user_id int NOT NULL AUTO_INCREMENT, username varchar(255) UNIQUE, active int, password varchar(255), PRIMARY KEY ( user_id ));")) {
+if ($mysqli->query("CREATE TABLE IF NOT EXISTS Users(user_id int NOT NULL AUTO_INCREMENT, username varchar(255) UNIQUE, active int, password varchar(255), PRIMARY KEY ( user_id ));")) {
     // echo "Table Users created successfully.<br />";
-} elseif ($mysqli->conn->errno) {
-    echo "Could not create table: %s<br />", $mysqli->conn->error;
+} elseif ($mysqli->errno) {
+    echo "Could not create table: %s<br />", $mysqli->error;
 }
 
-$mysqli->conn->close();
+$mysqli->close();
 
 
 
