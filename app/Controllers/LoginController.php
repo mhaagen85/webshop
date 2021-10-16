@@ -20,7 +20,7 @@ class LoginController extends AbstractController
             $this->redirect('productlist');
         }
 
-        parent::renderTemplate($path, []);
+        $this->renderTemplate($path, []);
     }
 
     public function login()

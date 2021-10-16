@@ -7,9 +7,9 @@ use Models\User;
 class UserController extends AbstractController
 {
 
-    public static function view($path)
+    public function view($path)
     {
-        parent::renderTemplate($path, []);
+        $this->renderTemplate($path, []);
     }
 
     public function create()

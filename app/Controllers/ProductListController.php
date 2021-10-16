@@ -11,6 +11,6 @@ class ProductListController extends AbstractController
     {
         $productListModel = new ProductList();
         $productList = $productListModel->getAll();
-        parent::renderTemplate('productlist', $productList);
+        $this->renderTemplate('productlist', $productList);
     }
 }
