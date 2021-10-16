@@ -12,4 +12,10 @@ abstract class AbstractController
         $mustacheEngine = new Mustache_Engine(['loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/../views')]);
         echo $mustacheEngine->render($template, ['data' => $data]);
     }
+
+    public function redirect($path)
+    {
+        header('Location: ' . $path);
+        exit;
+    }
 }

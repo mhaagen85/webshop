@@ -10,5 +10,9 @@ if ($mysqli->query("CREATE TABLE IF NOT EXISTS Products(product_id int NOT NULL 
    echo "Could not create table: %s<br />", $mysqli->error;
 }
 
+if ($mysqli->query("SELECT * FROM Products")->num_rows < 15) {
+    require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR .'/Data/products.php';
+}
+
 $mysqli->close();
 

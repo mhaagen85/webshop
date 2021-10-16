@@ -7,7 +7,7 @@ use Models\ProductList;
 class ProductListController extends AbstractController
 {
 
-    public static function view()
+    public function view()
     {
         $productListModel = new ProductList();
         $productList = $productListModel->getProductList();

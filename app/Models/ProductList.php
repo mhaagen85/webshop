@@ -10,6 +10,6 @@ class ProductList
     {
 
         $db = DbConnection::getConn();
-        return $db->query("SELECT * FROM Products")->fetch_assoc();
+        return $db->query("SELECT name, price,stock FROM Products")->fetch_all(MYSQLI_ASSOC);
     }
 }

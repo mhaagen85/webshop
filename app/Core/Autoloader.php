@@ -14,3 +14,4 @@ class Autoloader
 }
 
 spl_autoload_register('Core\AutoLoader::autoLoadClass');
+session_start();
