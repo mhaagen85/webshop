@@ -4,12 +4,13 @@ namespace Models;
 
 use Core\DbConnection;
 
-class ProductList
+class ProductList extends AbstractModel
 {
-    public function getProductList()
-    {
+    const TABLE = 'Products';
 
-        $db = DbConnection::getConn();
-        return $db->query("SELECT name, price,stock FROM Products")->fetch_all(MYSQLI_ASSOC);
+    public function __construct()
+    {
+        parent::__construct(self::TABLE);
     }
+
 }
