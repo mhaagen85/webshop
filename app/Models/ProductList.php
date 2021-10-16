@@ -8,7 +8,8 @@ class ProductList
 {
     public function getProductList()
     {
-        $db = new DbConnection();
-        return $db->conn->query("SELECT * FROM Products")->fetch_assoc();
+
+        $db = DbConnection::getConn();
+        return $db->query("SELECT * FROM Products")->fetch_assoc();
     }
 }
