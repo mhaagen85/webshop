@@ -49,7 +49,7 @@ class Router
      */
     public function resolve(Request $request)
     {
-        $uri = $request->requestUri;
+        $uri = explode('?',$request->requestUri)[0];
         if(array_key_exists($uri, $this->routes)) {
             $matchedRoute = $this->routes[$uri];
             $response = call_user_func($matchedRoute['callback']);

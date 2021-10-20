@@ -9,7 +9,7 @@ class UserController extends AbstractController
 
     public function view($path)
     {
-        $this->renderTemplate($path, []);
+        $this->renderTemplate('user/' . $path, []);
     }
 
     public function create()

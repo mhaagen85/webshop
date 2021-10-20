@@ -19,4 +19,5 @@ abstract class AbstractModel
     {
         return $this->conn->query("SELECT * FROM $this->table")->fetch_all(MYSQLI_ASSOC);
     }
+
 }

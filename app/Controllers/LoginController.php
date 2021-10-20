@@ -20,7 +20,7 @@ class LoginController extends AbstractController
             $this->redirect('productlist');
         }
 
-        $this->renderTemplate($path, []);
+        $this->renderTemplate('user/' . $path, []);
     }
 
     public function login()
@@ -31,7 +31,27 @@ class LoginController extends AbstractController
         }
 
         $_SESSION["username"] = $_POST['username'];
+        $_SESSION['loggedin'] = true;
 
         $this->redirect('productlist');
+    }
+
+    public function getLoggedInUser()
+    {
+        $username = $_SESSION['username'];
+        $loggedIn = $_SESSION['loggedin'];
+
+        if ($username && $loggedIn){
+            return 'true';
+        }
+
+        return false;
+    }
+
+    public function logout()
+    {
+        session_destroy();
+
+        $this->redirect('login');
     }
 }
