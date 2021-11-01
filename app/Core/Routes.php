@@ -1,23 +1,42 @@
 <?php
 
+// Home
 $router->add('/', function() {
     $loginController = new \Controllers\LoginController();
     $loginController->view('login');
 }, "GET");
 
+// Product
 $router->add('/productlist', function() {
-    $productListController = new \Controllers\ProductListController();
-    $productListController->view();
+    $productListController = new \Controllers\ProductController();
+    $productListController->view('index');
 }, "GET");
 
-$router->add('/product/{id}', function($params) {
-    return 'Hello product with ID: ' . $params['id'];
+$router->add('/product-form', function() {
+    $productListController = new \Controllers\ProductController();
+    $productListController->view('add-form');
 }, 'GET');
 
+$router->add('/create-product', function() {
+    $productController = new \Controllers\ProductController();
+    $productController->create();
+}, 'POST');
+
+$router->add('/delete-product', function() {
+    $productController = new \Controllers\ProductController();
+    $productController->delete();
+}, 'POST');
+
+// User
 $router->add('/login', function() {
     $loginController = new \Controllers\LoginController();
-    $loginController->login();
-}, 'POST');
+    $loginController->view('login');
+}, 'GET');
+
+$router->add('/logout', function() {
+    $loginController = new \Controllers\LoginController();
+    $loginController->logout();
+}, 'GET');
 
 $router->add('/register', function() {
     $userController = new \Controllers\UserController();
@@ -27,5 +46,10 @@ $router->add('/register', function() {
 $router->add('/create-user', function() {
     $userController = new \Controllers\UserController();
     $userController->create();
+}, 'POST');
+
+$router->add('/login-user', function() {
+    $loginController = new \Controllers\LoginController();
+    $loginController->login();
 }, 'POST');
 

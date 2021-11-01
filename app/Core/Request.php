@@ -34,6 +34,9 @@ class Request
         return $result;
     }
 
+    /**
+     * @return array|void|null
+     */
     public function getBody()
     {
         $body = null;
