@@ -19,5 +19,6 @@
 *  BUGFIX renames file with capital letter *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added loggedIn check *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Removed buttons in productlist for non-logged in user *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Added comments *(martijn.vanhaagen@experius.nl)*
 
 

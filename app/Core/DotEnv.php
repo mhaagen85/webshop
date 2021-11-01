@@ -11,7 +11,9 @@ class DotEnv
      */
     protected $path;
 
-
+    /**
+     * @param string $path
+     */
     public function __construct(string $path)
     {
         if(!file_exists($path)) {
@@ -20,6 +22,9 @@ class DotEnv
         $this->path = $path;
     }
 
+    /**
+     * Load Env file
+     */
     public function load()
     {
         if (!is_readable($this->path)) {

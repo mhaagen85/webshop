@@ -4,15 +4,22 @@ namespace Models;
 
 use Core\DbConnection;
 
-class User
+class User extends AbstractModel
 {
-    protected $conn;
+    const TABLE = 'Users';
 
+    /**
+     * Parent table
+     */
     public function __construct()
     {
-        $this->conn = DbConnection::getConn();
+        parent::__construct(self::TABLE);
     }
 
+    /**
+     * @param $postData
+     * @return bool|\mysqli_result
+     */
     public function create($postData)
     {
         $userName = $_POST['username'];

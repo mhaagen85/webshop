@@ -8,16 +8,26 @@ class Product extends AbstractModel
 {
     const TABLE = 'Products';
 
+    /**
+     * Parent table
+     */
     public function __construct()
     {
         parent::__construct(self::TABLE);
     }
 
+    /**
+     * @return bool|\mysqli_result
+     */
     public function delete()
     {
         return $this->conn->query("DELETE FROM $this->table WHERE product_id = '".$_GET['id']."'");
     }
 
+    /**
+     * @param $postData
+     * @return bool|\mysqli_result
+     */
     public function create($postData)
     {
         $name = $postData['name'];
@@ -29,6 +39,10 @@ class Product extends AbstractModel
                       name, price, description, stock) VALUES ('".$name."', '".$price."', '".$description."', '".$stock."')");
     }
 
+    /**
+     * @param $postData
+     * @return bool|\mysqli_result
+     */
     public function update($postData)
     {
         $id = $postData['product_id'];
@@ -46,6 +60,10 @@ class Product extends AbstractModel
                 ");
     }
 
+    /**
+     * @param $id
+     * @return array|null
+     */
     public function getById($id)
     {
         return $this->conn->query("SELECT * FROM $this->table WHERE product_id = '".$_GET['id']."'")->fetch_assoc();
