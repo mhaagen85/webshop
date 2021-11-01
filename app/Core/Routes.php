@@ -1,21 +1,23 @@
 <?php
 
+// Home
 $router->add('/', function() {
     $loginController = new \Controllers\LoginController();
     $loginController->view('login');
 }, "GET");
 
+// Product
 $router->add('/productlist', function() {
     $productListController = new \Controllers\ProductController();
     $productListController->view('index');
 }, "GET");
 
-$router->add('/add-product-form', function() {
+$router->add('/product-form', function() {
     $productListController = new \Controllers\ProductController();
     $productListController->view('add-form');
 }, 'GET');
 
-$router->add('/add-product', function() {
+$router->add('/create-product', function() {
     $productController = new \Controllers\ProductController();
     $productController->create();
 }, 'POST');
@@ -25,15 +27,11 @@ $router->add('/delete-product', function() {
     $productController->delete();
 }, 'POST');
 
+// User
 $router->add('/login', function() {
     $loginController = new \Controllers\LoginController();
     $loginController->view('login');
 }, 'GET');
-
-$router->add('/login-user', function() {
-    $loginController = new \Controllers\LoginController();
-    $loginController->login();
-}, 'POST');
 
 $router->add('/logout', function() {
     $loginController = new \Controllers\LoginController();
@@ -48,5 +46,10 @@ $router->add('/register', function() {
 $router->add('/create-user', function() {
     $userController = new \Controllers\UserController();
     $userController->create();
+}, 'POST');
+
+$router->add('/login-user', function() {
+    $loginController = new \Controllers\LoginController();
+    $loginController->login();
 }, 'POST');
 
