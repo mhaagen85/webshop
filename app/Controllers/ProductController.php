@@ -49,7 +49,7 @@ class ProductController extends AbstractController
     public function delete()
     {
         $productModel = new Product();
-        $productModel->delete();
+        $productModel->delete($_GET['id']);
 
         $this->redirect('productlist');
     }

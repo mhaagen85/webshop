@@ -6,15 +6,10 @@ use Core\DbConnection;
 
 class User extends AbstractModel
 {
-    const TABLE = 'Users';
-
     /**
-     * Parent table
+     * @var string
      */
-    public function __construct()
-    {
-        parent::__construct(self::TABLE);
-    }
+    protected $table = 'Users';
 
     /**
      * @param $postData
