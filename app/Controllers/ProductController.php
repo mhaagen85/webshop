@@ -13,7 +13,7 @@ class ProductController extends AbstractController
         switch ($type) {
             case 'index':
                 $productModel = new Product();
-                $data = $productModel->getAll();
+                $data['products'] = $productModel->getAll();
                 break;
             case 'add-form':
                 if (isset($_GET['id'])) {

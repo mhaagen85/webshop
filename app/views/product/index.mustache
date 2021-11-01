@@ -7,7 +7,7 @@
         <th>Stock</th>
         <th>Price</th>
     </tr>
-    {{# data }}
+    {{# data.products }}
     <tr>
         <td>{{ name }}</td>
         <td>{{ description }}
@@ -17,7 +17,7 @@
             <a class="button is-primary" href="product-form?id={{ product_id }}">Edit</a>
             <a class="button is-danger" href="delete-product?id={{ product_id }}"">Delete</a>
          </td>
-    {{/ data }}
+    {{/ data.products }}
     </tr>
 </table>
 
