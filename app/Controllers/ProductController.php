@@ -16,8 +16,10 @@ class ProductController extends AbstractController
                 $data = $productModel->getAll();
                 break;
             case 'add-form':
-                $productModel = new Product();
-                $data = $productModel->getById($_GET['id']);
+                if (isset($_GET['id'])) {
+                    $productModel = new Product();
+                    $data = $productModel->getById($_GET['id']);
+                }
                 break;
         }
 
