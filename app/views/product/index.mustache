@@ -1,0 +1,21 @@
+
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Stock</th>
+        <th>Price</th>
+    </tr>
+    {{# data }}
+    <tr>
+        <td>{{ name }}</td>
+        <td>{{ description }}
+        <td>{{ stock }}
+        <td>{{ price }}
+         <td>
+            <button type="button"><a href="add-product-form?id={{ product_id }}" class="button is-primary">Edit</a></button>
+            <button type="button"><a href="delete-product?id={{ product_id }}" class="button is-primary">Delete</a></button>
+         </td>
+    {{/ data }}
+    </tr>
+</table>

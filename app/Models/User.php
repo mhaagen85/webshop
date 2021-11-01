@@ -18,8 +18,7 @@ class User
         $userName = $_POST['username'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        return $this->conn->query("INSERT INTO Users 
-                                    (username, active, password) 
-                                        VALUES ('".$userName."', 1, '".$password."')");
+        return $this->conn->query("INSERT INTO Users (username, active, password) 
+                                            VALUES ('".$userName."', 1, '".$password."')");
     }
 }

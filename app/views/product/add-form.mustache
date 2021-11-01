@@ -1,0 +1,8 @@
+ <form action="add-product" method="POST">
+        <p>Product Name</p> <input type="text" name="name" value={{ data.name }}>
+        <p>Price</p> <input type="int" name="price" value={{ data.price }}>
+        <p>Description</p><textarea name="description" rows="6" cols="25">{{ data.description }}</textarea><br />
+        <p>Stock</p> <input type="int" name="stock" value={{ data.stock }}>
+        <input type="hidden" id="id" name="id" value="{{ data.product_id }}">
+        <input type="submit" value="Send"><input type="reset" value="Clear">
+</form>

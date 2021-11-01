@@ -7,10 +7,12 @@ use Mustache_Loader_FilesystemLoader;
 
 abstract class AbstractController
 {
-    public static function renderTemplate($template, $data)
+    protected $mustacheEngine;
+
+    public function renderTemplate($template, $data)
     {
-        $mustacheEngine = new Mustache_Engine(['loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/../views')]);
-        echo $mustacheEngine->render($template, ['data' => $data]);
+        $this->mustacheEngine = new Mustache_Engine(['loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/../views')]);
+        echo $this->mustacheEngine->render($template, ['data' => $data]);
     }
 
     public function redirect($path)
