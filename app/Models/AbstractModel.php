@@ -7,30 +7,37 @@ use Core\DbConnection;
 abstract class AbstractModel
 {
     /**
-     * @var \mysqli
+     * @return \mysqli
      */
-    protected $conn;
-
-    /**
-     * @var
-     */
-    protected $table;
-
-    /**
-     * @param $table
-     */
-    public function __construct($table)
+    public static function getConnection()
     {
-        $this->table = $table;
-        $this->conn = DbConnection::getConn();
+        return DbConnection::getConn();
     }
 
     /**
      * @return mixed
      */
-    public function getAll()
+    public static function getAll()
     {
-        return $this->conn->query("SELECT * FROM $this->table")->fetch_all(MYSQLI_ASSOC);
+        return self::getConnection()->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
+    }
+
+    /**
+     * @param $id
+     * @return bool|\mysqli_result
+     */
+    public static function delete($id)
+    {
+        return self::getConnection()->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
+    }
+
+    /**
+     * @param $id
+     * @return array|null
+     */
+    public static function getById($id)
+    {
+        return self::getConnection()->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();
     }
 
 }
