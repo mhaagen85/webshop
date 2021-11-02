@@ -19,7 +19,11 @@ abstract class AbstractModel
      */
     public static function getAll()
     {
-        return self::getConnection()->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
+        $mysqli = self::getConnection();
+        $result = $mysqli->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
+        $result == true ? $mysqli->close() :  $result = "Error getting all records: " . $mysqli->error;
+
+        return $result;
     }
 
     /**
@@ -28,7 +32,11 @@ abstract class AbstractModel
      */
     public static function delete($id)
     {
-        return self::getConnection()->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
+        $mysqli = self::getConnection();
+        $result = $mysqli->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
+        $result == true ? $mysqli->close() :  $result = "Error deleting record: " . $mysqli->error;
+
+        return $result;
     }
 
     /**
@@ -37,7 +45,11 @@ abstract class AbstractModel
      */
     public static function getById($id)
     {
-        return self::getConnection()->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();
+        $mysqli = self::getConnection();
+        $result = $mysqli->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();
+        $result == true ? $mysqli->close() :  $result = "Error getting record by ID: " . $mysqli->error;
+
+        return $result;
     }
 
 }
