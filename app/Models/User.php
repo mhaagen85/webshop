@@ -24,7 +24,11 @@ class User extends AbstractModel
                                             VALUES ('".$userName."', 1, '".$password."')");
     }
 
-    public static function getByUserName($userName)
+    /**
+     * @param $userName
+     * @return bool
+     */
+    public static function getByUserName($userName) : bool
     {
         return self::getConnection()->query("SELECT * FROM `".self::TABLE."` WHERE username ='".$userName."'")->num_rows == 0;
     }

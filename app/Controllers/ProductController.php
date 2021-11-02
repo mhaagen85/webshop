@@ -7,6 +7,9 @@ use Models\Product;
 class ProductController extends AbstractController
 {
 
+    /**
+     * @param $type
+     */
     public function view($type)
     {
         $data = [];
@@ -24,6 +27,9 @@ class ProductController extends AbstractController
         $this->renderTemplate('product/'.$type , $data);
     }
 
+    /**
+     * create Product
+     */
     public function create()
     {
         $product = new Product();
