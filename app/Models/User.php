@@ -6,10 +6,9 @@ use Core\DbConnection;
 
 class User extends AbstractModel
 {
-    /**
-     * @var string
-     */
-    protected $table = 'Users';
+    CONST TABLE = 'Users';
+
+    protected $properties = ['username', 'active', 'password'];
 
     /**
      * @param $postData
@@ -19,8 +18,9 @@ class User extends AbstractModel
     {
         $userName = $_POST['username'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $properties = implode(',', $this->properties);
 
-        return $this->conn->query("INSERT INTO Users (username, active, password) 
+        return $this->getConnection()->query("INSERT INTO `".self::TABLE."` ($properties) 
                                             VALUES ('".$userName."', 1, '".$password."')");
     }
 }

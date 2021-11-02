@@ -6,23 +6,10 @@ use Core\DbConnection;
 
 class Product extends AbstractModel
 {
-    const TABLE = 'Products';
+    CONST TABLE = 'Products';
+    CONST ID = 'product_id';
 
-    /**
-     * Parent table
-     */
-    public function __construct()
-    {
-        parent::__construct(self::TABLE);
-    }
-
-    /**
-     * @return bool|\mysqli_result
-     */
-    public function delete()
-    {
-        return $this->conn->query("DELETE FROM $this->table WHERE product_id = '".$_GET['id']."'");
-    }
+    protected $properties = ['name', 'price', 'description', 'stock'];
 
     /**
      * @param $postData
@@ -35,8 +22,14 @@ class Product extends AbstractModel
         $description = $postData['description'];
         $stock = $postData['stock'];
 
-        return $this->conn->query("INSERT INTO Products (
-                      name, price, description, stock) VALUES ('".$name."', '".$price."', '".$description."', '".$stock."')");
+        $properties = implode(',', $this->properties);
+
+        return $this->getConnection()->query("
+                    INSERT INTO `".self::TABLE."` (
+                      $properties) 
+                      VALUES (
+                      '".$name."', '".$price."', '".$description."', '".$stock."')
+                      ");
     }
 
     /**
@@ -51,7 +44,8 @@ class Product extends AbstractModel
         $description = $postData['description'];
         $stock = $postData['stock'];
 
-        return $this->conn->query("UPDATE Products SET 
+        return $this->getConnection()->query("
+                UPDATE `".self::TABLE."` SET 
                 name = '".$name."', 
                 price = '".$price."',
                 description = '".$description."',
@@ -60,12 +54,4 @@ class Product extends AbstractModel
                 ");
     }
 
-    /**
-     * @param $id
-     * @return array|null
-     */
-    public function getById($id)
-    {
-        return $this->conn->query("SELECT * FROM $this->table WHERE product_id = '".$_GET['id']."'")->fetch_assoc();
-    }
 }
