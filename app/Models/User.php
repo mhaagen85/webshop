@@ -23,4 +23,9 @@ class User extends AbstractModel
         return $this->getConnection()->query("INSERT INTO `".self::TABLE."` ($properties) 
                                             VALUES ('".$userName."', 1, '".$password."')");
     }
+
+    public static function getByUserName($userName)
+    {
+        return self::getConnection()->query("SELECT * FROM `".self::TABLE."` WHERE username ='".$userName."'")->num_rows == 0;
+    }
 }
