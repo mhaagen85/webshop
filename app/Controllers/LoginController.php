@@ -8,7 +8,7 @@ use Models\User;
 class LoginController extends AbstractController
 {
     /**
-     * @var \mysqli 
+     * @var \mysqli
      */
     protected $conn;
 
