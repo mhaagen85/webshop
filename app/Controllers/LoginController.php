@@ -38,7 +38,8 @@ class LoginController extends AbstractController
     public function login()
     {
         $username = $_POST['username'];
-        if ($this->conn->query(User::getByUserName($username)) == false) {
+        // Check if user exist in DB
+        if ($this->conn->query(User::getByUserName($username)) == true) {
             $this->redirect('register');
         }
 
