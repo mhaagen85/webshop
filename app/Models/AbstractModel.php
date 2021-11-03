@@ -7,30 +7,49 @@ use Core\DbConnection;
 abstract class AbstractModel
 {
     /**
-     * @var \mysqli
+     * @return \mysqli
      */
-    protected $conn;
-
-    /**
-     * @var
-     */
-    protected $table;
-
-    /**
-     * @param $table
-     */
-    public function __construct($table)
+    public static function getConnection()
     {
-        $this->table = $table;
-        $this->conn = DbConnection::getConn();
+        return DbConnection::getConn();
     }
 
     /**
      * @return mixed
      */
-    public function getAll()
+    public static function getAll()
     {
-        return $this->conn->query("SELECT * FROM $this->table")->fetch_all(MYSQLI_ASSOC);
+        $mysqli = self::getConnection();
+        $result = $mysqli->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
+        $result == true ? $mysqli->close() :  $result = "Error getting all records: " . $mysqli->error;
+
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @return bool|\mysqli_result
+     */
+    public static function delete($id)
+    {
+        $mysqli = self::getConnection();
+        $result = $mysqli->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
+        $result == true ? $mysqli->close() :  $result = "Error deleting record: " . $mysqli->error;
+
+        return $result;
+    }
+
+    /**
+     * @param $id
+     * @return array|null
+     */
+    public static function getById($id)
+    {
+        $mysqli = self::getConnection();
+        $result = $mysqli->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();
+        $result == true ? $mysqli->close() :  $result = "Error getting record by ID: " . $mysqli->error;
+
+        return $result;
     }
 
 }

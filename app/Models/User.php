@@ -6,15 +6,9 @@ use Core\DbConnection;
 
 class User extends AbstractModel
 {
-    const TABLE = 'Users';
+    CONST TABLE = 'Users';
 
-    /**
-     * Parent table
-     */
-    public function __construct()
-    {
-        parent::__construct(self::TABLE);
-    }
+    protected $properties = ['username', 'active', 'password'];
 
     /**
      * @param $postData
@@ -24,8 +18,18 @@ class User extends AbstractModel
     {
         $userName = $_POST['username'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $properties = implode(',', $this->properties);
 
-        return $this->conn->query("INSERT INTO Users (username, active, password) 
+        return $this->getConnection()->query("INSERT INTO `".self::TABLE."` ($properties) 
                                             VALUES ('".$userName."', 1, '".$password."')");
+    }
+
+    /**
+     * @param $userName
+     * @return bool
+     */
+    public static function getByUserName($userName) : bool
+    {
+        return self::getConnection()->query("SELECT * FROM `".self::TABLE."` WHERE username ='".$userName."'")->num_rows == 0;
     }
 }

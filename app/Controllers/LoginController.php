@@ -3,17 +3,26 @@
 namespace Controllers;
 
 use Core\DbConnection;
+use Models\User;
 
 class LoginController extends AbstractController
 {
+    /**
+     * @var \mysqli
+     */
     protected $conn;
 
+    /**
+     * db Connection
+     */
     public function __construct()
     {
         $this->conn = DbConnection::getConn();
     }
 
-
+    /*
+     * View
+     */
     public function view($path)
     {
         if (isset($_SESSION['username'])) {
@@ -23,19 +32,26 @@ class LoginController extends AbstractController
         $this->renderTemplate('user/' . $path, []);
     }
 
+    /**
+     * Login User
+     */
     public function login()
     {
         $username = $_POST['username'];
-        if ($this->conn->query("SELECT * FROM Users WHERE username ='".$username."'")->num_rows == 0) {
+        // Check if user exist in DB
+        if ($this->conn->query(User::getByUserName($username)) == true) {
             $this->redirect('register');
         }
 
-        $_SESSION["username"] = $_POST['username'];
+        $_SESSION["username"] = $username;
         $_SESSION['loggedin'] = true;
 
         $this->redirect('productlist');
     }
 
+    /**
+     * @return false|string
+     */
     public function getLoggedInUser()
     {
         $username = $_SESSION['username'];
@@ -48,6 +64,9 @@ class LoginController extends AbstractController
         return false;
     }
 
+    /**
+     * logout User
+     */
     public function logout()
     {
         session_destroy();

@@ -1,4 +1,4 @@
-##  (2021-11-01)
+##  (2021-11-03)
 
 [View Release](ssh://git@github.com/mhaagen85/webshop.git/commits/tag/)
 
@@ -21,5 +21,11 @@
 *  [FEATURE] Removed buttons in productlist for non-logged in user *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added comments *(martijn.vanhaagen@experius.nl)*
 *  Added Readme *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] adjusted code *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Made abstract functions static to prevent unness model creation *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Closes db connection *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Adjusted login functionality *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Added comments *(martijn.vanhaagen@experius.nl)*
+*  [BUGFIX] Fixed wrong check value *(martijn.vanhaagen@experius.nl)*
 
 

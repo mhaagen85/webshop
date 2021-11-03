@@ -7,18 +7,19 @@ use Models\Product;
 class ProductController extends AbstractController
 {
 
+    /**
+     * @param $type
+     */
     public function view($type)
     {
         $data = [];
         switch ($type) {
             case 'index':
-                $productModel = new Product();
-                $data['products'] = $productModel->getAll();
+                $data['products'] = Product::getAll();
                 break;
             case 'add-form':
                 if (isset($_GET['id'])) {
-                    $productModel = new Product();
-                    $data = $productModel->getById($_GET['id']);
+                    $data = Product::getById($_GET['id']);
                 }
                 break;
         }
@@ -26,6 +27,9 @@ class ProductController extends AbstractController
         $this->renderTemplate('product/'.$type , $data);
     }
 
+    /**
+     * create Product
+     */
     public function create()
     {
         $product = new Product();
@@ -46,11 +50,12 @@ class ProductController extends AbstractController
         $this->redirect('productlist');
     }
 
+    /**
+     * Delete Product
+     */
     public function delete()
     {
-        $productModel = new Product();
-        $productModel->delete();
-
+        Product::delete($_GET['id']);
         $this->redirect('productlist');
     }
 }
