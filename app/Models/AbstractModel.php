@@ -7,6 +7,11 @@ use Core\DbConnection;
 abstract class AbstractModel
 {
     /**
+     * @return mixed
+     */
+    abstract function create($postData);
+
+    /**
      * @return \mysqli
      */
     public static function getConnection()
@@ -17,7 +22,7 @@ abstract class AbstractModel
     /**
      * @return mixed
      */
-    public static function getAll()
+    public function getAll()
     {
         $mysqli = self::getConnection();
         $result = $mysqli->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
@@ -30,7 +35,7 @@ abstract class AbstractModel
      * @param $id
      * @return bool|\mysqli_result
      */
-    public static function delete($id)
+    public function delete($id)
     {
         $mysqli = self::getConnection();
         $result = $mysqli->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
@@ -43,7 +48,7 @@ abstract class AbstractModel
      * @param $id
      * @return array|null
      */
-    public static function getById($id)
+    public function getById($id)
     {
         $mysqli = self::getConnection();
         $result = $mysqli->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();

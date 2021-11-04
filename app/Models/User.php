@@ -2,22 +2,20 @@
 
 namespace Models;
 
-use Core\DbConnection;
-
 class User extends AbstractModel
 {
     CONST TABLE = 'Users';
-
     protected $properties = ['username', 'active', 'password'];
 
     /**
-     * @param $postData
+     * @param $userName
+     * @param $password
      * @return bool|\mysqli_result
      */
     public function create($postData)
     {
-        $userName = $_POST['username'];
-        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $userName = $postData['username'];
+        $password = password_hash($postData['password'], PASSWORD_DEFAULT);
         $properties = implode(',', $this->properties);
 
         return $this->getConnection()->query("INSERT INTO `".self::TABLE."` ($properties) 
@@ -28,8 +26,33 @@ class User extends AbstractModel
      * @param $userName
      * @return bool
      */
-    public static function getByUserName($userName) : bool
+    public function getByUserName($userName) : bool
     {
-        return self::getConnection()->query("SELECT * FROM `".self::TABLE."` WHERE username ='".$userName."'")->num_rows == 0;
+        return self::getConnection()->query("SELECT * FROM `".self::TABLE."` WHERE username ='".$userName."'")->num_rows == 1;
+    }
+
+    /**
+     * @param $username
+     */
+    public function loginUser($username)
+    {
+        $_SESSION["username"] = $username;
+        $_SESSION['loggedin'] = true;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isLoggedIn() : bool
+    {
+        return isset($_SESSION['loggedin']) ?? false;
+    }
+
+    /**
+     * logout User
+     */
+    public static function logout()
+    {
+        session_destroy();
     }
 }

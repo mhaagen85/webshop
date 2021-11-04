@@ -7,6 +7,19 @@ use Models\User;
 class UserController extends AbstractController
 {
     /**
+     * @var User
+     */
+    protected $user;
+
+    /**
+     * @param User $user
+     */
+    public function __construct(User $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
      * @param $path
      * View
      */
@@ -22,12 +35,10 @@ class UserController extends AbstractController
     {
         $postData = [
             'username' => $_POST['username'],
-            'password' => $_POST['password']
+            'password' => $_POST['password'],
         ];
 
-        $user = new User;
-        $user->create($postData);
-
+        $this->user->create($postData);
         $this->redirect('/');
     }
 }

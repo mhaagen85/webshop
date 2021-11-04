@@ -8,16 +8,16 @@ use Models\User;
 class LoginController extends AbstractController
 {
     /**
-     * @var \mysqli
+     * @var User
      */
-    protected $conn;
+    protected $user;
 
     /**
-     * db Connection
+     * @param User $user
      */
-    public function __construct()
+    public function __construct(User $user)
     {
-        $this->conn = DbConnection::getConn();
+        $this->user = $user;
     }
 
     /*
@@ -25,11 +25,7 @@ class LoginController extends AbstractController
      */
     public function view($path)
     {
-        if (isset($_SESSION['username'])) {
-            $this->redirect('productlist');
-        }
-
-        $this->renderTemplate('user/' . $path, []);
+        $this->user->isLoggedIn() ? $this->redirect('productlist') : $this->renderTemplate('user/' . $path, []);
     }
 
     /**
@@ -38,30 +34,9 @@ class LoginController extends AbstractController
     public function login()
     {
         $username = $_POST['username'];
-        // Check if user exist in DB
-        if ($this->conn->query(User::getByUserName($username)) == true) {
-            $this->redirect('register');
-        }
-
-        $_SESSION["username"] = $username;
-        $_SESSION['loggedin'] = true;
-
+        // Check if user exist in DB, if not redirect to register
+        $this->user->getByUserName($username) == false ? $this->redirect('register') : $this->user->LoginUser($username);
         $this->redirect('productlist');
-    }
-
-    /**
-     * @return false|string
-     */
-    public function getLoggedInUser()
-    {
-        $username = $_SESSION['username'];
-        $loggedIn = $_SESSION['loggedin'];
-
-        if ($username && $loggedIn){
-            return 'true';
-        }
-
-        return false;
     }
 
     /**
@@ -69,8 +44,7 @@ class LoginController extends AbstractController
      */
     public function logout()
     {
-        session_destroy();
-
+        $this->user->logout();
         $this->redirect('login');
     }
 }
