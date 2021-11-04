@@ -34,23 +34,4 @@ class Request
         return $result;
     }
 
-    /**
-     * @return array|void|null
-     */
-    public function getBody()
-    {
-        $body = null;
-        if ($this->requestMethod === "GET") {
-            return;
-        }
-        if ($this->requestMethod == "POST") {
-            $result = array();
-            foreach ($_POST as $key => $value) {
-                $result[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
-            }
-            return $result;
-        }
-
-        return $body;
-    }
 }
