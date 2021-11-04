@@ -2,13 +2,10 @@
 
 namespace Models;
 
-use Core\DbConnection;
-
 class Product extends AbstractModel
 {
     CONST TABLE = 'Products';
     CONST ID = 'product_id';
-
     protected $properties = ['name', 'price', 'description', 'stock'];
 
     /**

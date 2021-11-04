@@ -6,25 +6,37 @@ use Models\Product;
 
 class ProductController extends AbstractController
 {
+    /**
+     * @var Product
+     */
+    protected $product;
 
     /**
-     * @param $type
+     * @param Product $product
      */
-    public function view($type)
+    public function __construct(Product $product)
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * @param $path
+     * @return mixed|void
+     */
+    public function view($path)
     {
         $data = [];
-        switch ($type) {
+        switch ($path) {
             case 'index':
-                $data['products'] = Product::getAll();
+                $data['products'] = $this->product->getAll();
                 break;
             case 'add-form':
-                if (isset($_GET['id'])) {
-                    $data = Product::getById($_GET['id']);
-                }
+
+                isset($_GET['id']) ? $data = $this->product->getById($_GET['id']) : '';
                 break;
         }
 
-        $this->renderTemplate('product/'.$type , $data);
+        $this->renderTemplate('product/'.$path , $data);
     }
 
     /**
@@ -32,7 +44,6 @@ class ProductController extends AbstractController
      */
     public function create()
     {
-        $product = new Product();
         $postData = [
             'name' => $_POST['name'],
             'price' => $_POST['price'],
@@ -40,13 +51,7 @@ class ProductController extends AbstractController
             'stock' => $_POST['stock']
         ];
 
-        if ($_POST['id']) {
-            $postData['product_id'] = $_POST['id'];
-            $product->update($postData);
-        } else {
-            $product->create($postData);
-        }
-
+        $_POST['id'] ? ($postData['product_id'] = $_POST['id']) && $this->product->update($postData) : $this->product->create($postData);
         $this->redirect('productlist');
     }
 
@@ -55,7 +60,7 @@ class ProductController extends AbstractController
      */
     public function delete()
     {
-        Product::delete($_GET['id']);
+        $this->product->delete($_GET['id']);
         $this->redirect('productlist');
     }
 }
