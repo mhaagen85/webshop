@@ -30,5 +30,6 @@
 *  [FEATURE] refactored code, implemented constructor *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] refactored routes and request class *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added Homepage *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Added homepage + adjusted in header/footer *(martijn.vanhaagen@experius.nl)*
 
 
