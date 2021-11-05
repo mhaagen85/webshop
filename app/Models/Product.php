@@ -2,6 +2,8 @@
 
 namespace Models;
 
+use Core\DbConnection;
+
 class Product extends AbstractModel
 {
     CONST TABLE = 'Products';
@@ -21,7 +23,7 @@ class Product extends AbstractModel
 
         $properties = implode(',', $this->properties);
 
-        return $this->getConnection()->query("
+        return $this->dbConnection->query("
                     INSERT INTO `".self::TABLE."` (
                       $properties) 
                       VALUES (
@@ -41,7 +43,7 @@ class Product extends AbstractModel
         $description = $postData['description'];
         $stock = $postData['stock'];
 
-        return $this->getConnection()->query("
+        return $this->dbConnection->query("
                 UPDATE `".self::TABLE."` SET 
                 name = '".$name."', 
                 price = '".$price."',

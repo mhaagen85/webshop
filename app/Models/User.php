@@ -18,7 +18,7 @@ class User extends AbstractModel
         $password = password_hash($postData['password'], PASSWORD_DEFAULT);
         $properties = implode(',', $this->properties);
 
-        return $this->getConnection()->query("INSERT INTO `".self::TABLE."` ($properties) 
+        return $this->dbConnection->query("INSERT INTO `".self::TABLE."` ($properties) 
                                             VALUES ('".$userName."', 1, '".$password."')");
     }
 
@@ -28,7 +28,7 @@ class User extends AbstractModel
      */
     public function getByUserName($userName) : bool
     {
-        return self::getConnection()->query("SELECT * FROM `".self::TABLE."` WHERE username ='".$userName."'")->num_rows == 1;
+        return $this->dbConnection->query("SELECT * FROM `".self::TABLE."` WHERE username ='".$userName."'")->num_rows == 1;
     }
 
     /**

@@ -14,9 +14,9 @@ class ProductController extends AbstractController
     /**
      * @param Product $product
      */
-    public function __construct(Product $product)
+    public function __construct()
     {
-        $this->product = $product;
+        $this->product = new Product();
     }
 
     /**

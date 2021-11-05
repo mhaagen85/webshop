@@ -7,26 +7,29 @@ use Core\DbConnection;
 abstract class AbstractModel
 {
     /**
+     * @var \mysqli
+     */
+    protected $dbConnection;
+
+    /**
+     * Db Connection
+     */
+    public function __construct()
+    {
+        $this->dbConnection = DbConnection::getConn();
+    }
+    /**
      * @return mixed
      */
     abstract function create($postData);
-
-    /**
-     * @return \mysqli
-     */
-    public static function getConnection()
-    {
-        return DbConnection::getConn();
-    }
 
     /**
      * @return mixed
      */
     public function getAll()
     {
-        $mysqli = self::getConnection();
-        $result = $mysqli->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
-        $result == true ? $mysqli->close() :  $result = "Error getting all records: " . $mysqli->error;
+        $result =  $this->dbConnection->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
+        $result == true ?  $this->dbConnection->close() :  $result = "Error getting all records: " .  $this->dbConnection->error;
 
         return $result;
     }
@@ -37,9 +40,8 @@ abstract class AbstractModel
      */
     public function delete($id)
     {
-        $mysqli = self::getConnection();
-        $result = $mysqli->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
-        $result == true ? $mysqli->close() :  $result = "Error deleting record: " . $mysqli->error;
+        $result =  $this->dbConnection->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
+        $result == true ?  $this->dbConnection->close() :  $result = "Error deleting record: " .  $this->dbConnection->error;
 
         return $result;
     }
@@ -50,9 +52,8 @@ abstract class AbstractModel
      */
     public function getById($id)
     {
-        $mysqli = self::getConnection();
-        $result = $mysqli->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();
-        $result == true ? $mysqli->close() :  $result = "Error getting record by ID: " . $mysqli->error;
+        $result = $this->dbConnection->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();
+        $result == true ?  $this->dbConnection->close() :  $result = "Error getting record by ID: " .  $this->dbConnection->error;
 
         return $result;
     }
