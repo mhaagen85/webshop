@@ -32,5 +32,6 @@
 *  [FEATURE] Added Homepage *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added homepage + adjusted in header/footer *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Moved styling + media *(martijn.vanhaagen@experius.nl)*
+*  [BUGFIX] Adjusted logo path *(martijn.vanhaagen@experius.nl)*
 
 
