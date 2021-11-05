@@ -5,12 +5,12 @@ use Models\Product;
 
 // Home
 $router->add('/', function() {
-    $loginController = new \Controllers\LoginController(new User());
-    $loginController->view('login');
+    $homeController = new \Controllers\HomeController();
+    $homeController->view('home');
 }, "GET");
 
 // Product
-$router->add('/productlist', function() {
+$router->add('/productlist', function () {
     $productListController = new \Controllers\ProductController(new Product());
     $productListController->view('index');
 }, "GET");
