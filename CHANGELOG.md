@@ -1,4 +1,4 @@
-##  (2021-11-03)
+##  (2021-11-05)
 
 [View Release](ssh://git@github.com/mhaagen85/webshop.git/commits/tag/)
 
@@ -27,5 +27,8 @@
 *  [FEATURE] Adjusted login functionality *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added comments *(martijn.vanhaagen@experius.nl)*
 *  [BUGFIX] Fixed wrong check value *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] refactored code, implemented constructor *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] refactored routes and request class *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Added Homepage *(martijn.vanhaagen@experius.nl)*
 
 
