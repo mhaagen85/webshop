@@ -25,7 +25,7 @@ abstract class AbstractController
      */
     public function renderTemplate($template, $data)
     {
-        $this->mustacheEngine = new Mustache_Engine(['loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__) . '/../views')]);
+        $this->mustacheEngine = new Mustache_Engine(['loader' => new Mustache_Loader_FilesystemLoader(dirname(__FILE__, 3) . '/views')]);
         $data['user'] = User::isLoggedIn();
 
         echo $this->mustacheEngine->render($template, ['data' => $data]);

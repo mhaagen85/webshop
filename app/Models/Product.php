@@ -8,7 +8,11 @@ class Product extends AbstractModel
 {
     CONST TABLE = 'Products';
     CONST ID = 'product_id';
-    protected $properties = ['name', 'price', 'description', 'stock'];
+
+    public string $name;
+    public int $price;
+    public string $description;
+    public int $stock;
 
     /**
      * @param $postData
@@ -16,18 +20,14 @@ class Product extends AbstractModel
      */
     public function create($postData)
     {
-        $name = $postData['name'];
-        $price = $postData['price'];
-        $description = $postData['description'];
-        $stock = $postData['stock'];
-
-        $properties = implode(',', $this->properties);
+        $this->validateData($postData);
+        $properties = $this->getClassProperties();
 
         return $this->dbConnection->query("
                     INSERT INTO `".self::TABLE."` (
                       $properties) 
                       VALUES (
-                      '".$name."', '".$price."', '".$description."', '".$stock."')
+                      '".$this->name."', '".$this->price."', '".$this->description."', '".$this->stock."')
                       ");
     }
 
@@ -38,18 +38,15 @@ class Product extends AbstractModel
     public function update($postData)
     {
         $id = $postData['product_id'];
-        $name = $postData['name'];
-        $price = $postData['price'];
-        $description = $postData['description'];
-        $stock = $postData['stock'];
+        $this->validateData($postData);
 
         return $this->dbConnection->query("
                 UPDATE `".self::TABLE."` SET 
-                name = '".$name."', 
-                price = '".$price."',
-                description = '".$description."',
-                stock = '".$stock."'
-                WHERE product_id = '".$id."'
+                name = '".$this->name."', 
+                price = '".$this->price."',
+                description = '".$this->description."',
+                stock = '".$this->stock."'
+                WHERE product_id = '".id."'
                 ");
     }
 

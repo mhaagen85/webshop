@@ -5,7 +5,10 @@ namespace Models;
 class User extends AbstractModel
 {
     CONST TABLE = 'Users';
-    protected $properties = ['username', 'active', 'password'];
+
+    public string $username;
+    public int $active;
+    public string $password;
 
     /**
      * @param $userName
@@ -14,12 +17,12 @@ class User extends AbstractModel
      */
     public function create($postData)
     {
-        $userName = $postData['username'];
-        $password = password_hash($postData['password'], PASSWORD_DEFAULT);
-        $properties = implode(',', $this->properties);
+        $this->validateData($postData);
+        $this->hashPassword($this->password);
+        $properties = $this->getClassProperties();
 
         return $this->dbConnection->query("INSERT INTO `".self::TABLE."` ($properties) 
-                                            VALUES ('".$userName."', 1, '".$password."')");
+                                            VALUES ('".$this->username."', 1, '".$this->password."')");
     }
 
     /**
@@ -54,5 +57,13 @@ class User extends AbstractModel
     public static function logout()
     {
         session_destroy();
+    }
+
+    /**
+     * @param $password
+     */
+    protected function hashPassword($password)
+    {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
 }

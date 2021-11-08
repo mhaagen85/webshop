@@ -29,7 +29,7 @@ abstract class AbstractModel
     public function getAll()
     {
         $result =  $this->dbConnection->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
-        $result == true ?  $this->dbConnection->close() :  $result = "Error getting all records: " .  $this->dbConnection->error;
+        $result == true ?  $this->dbConnection->close() :  $result = "Error getting all records: " . $this->dbConnection->error;
 
         return $result;
     }
@@ -41,7 +41,7 @@ abstract class AbstractModel
     public function delete($id)
     {
         $result =  $this->dbConnection->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
-        $result == true ?  $this->dbConnection->close() :  $result = "Error deleting record: " .  $this->dbConnection->error;
+        $result == true ?  $this->dbConnection->close() :  $result = "Error deleting record: " . $this->dbConnection->error;
 
         return $result;
     }
@@ -53,9 +53,33 @@ abstract class AbstractModel
     public function getById($id)
     {
         $result = $this->dbConnection->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();
-        $result == true ?  $this->dbConnection->close() :  $result = "Error getting record by ID: " .  $this->dbConnection->error;
+        $result == true ?  $this->dbConnection->close() :  $result = "Error getting record by ID: " . $this->dbConnection->error;
 
         return $result;
+    }
+
+    /**
+     * @param $postData
+     */
+    protected function validateData($postData)
+    {
+        foreach($postData as $key => $value) {
+            $this->$key = $value;
+        }
+    }
+
+    /**
+     * @return false|string
+     */
+    protected function getClassProperties()
+    {
+        $properties = '';
+        foreach(get_class_vars(get_called_class()) as $key => $value){
+            if ($key != "dbConnection")
+                $properties = $properties . ',' . $key;
+        }
+
+        return substr($properties, 1);
     }
 
 }

@@ -1,4 +1,4 @@
-##  (2021-11-05)
+##  (2021-11-08)
 
 [View Release](ssh://git@github.com/mhaagen85/webshop.git/commits/tag/)
 
@@ -34,5 +34,6 @@
 *  [FEATURE] Moved styling + media *(martijn.vanhaagen@experius.nl)*
 *  [BUGFIX] Adjusted logo path *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added db constructor *(martijn.vanhaagen@experius.nl)*
+*  [REFACTOR] refactored structure *(martijn.vanhaagen@experius.nl)*
 
 

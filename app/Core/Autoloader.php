@@ -12,9 +12,11 @@ class Autoloader
         // Add vendor classes
         if (strpos($className, '_')) {
             $className = 'vendor/' . str_replace("_", "/", $className);
+            require dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
+        } else {
+            // Add other classes
+            require dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
         }
-        // Add other classes
-        require dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
     }
 }
 
