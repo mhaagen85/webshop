@@ -40,5 +40,6 @@
 *  [REFACTOR] refactored db queries *(martijn.vanhaagen@experius.nl)*
 *  [BUGFIX] Adjusted getUserById statement *(martijn.vanhaagen@experius.nl)*
 *  [REFACTOR] Adjusted styling login *(martijn.vanhaagen@experius.nl)*
+*  [REFACTOR] Adjusted form styling *(martijn.vanhaagen@experius.nl)*
 
 
