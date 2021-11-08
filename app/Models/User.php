@@ -31,9 +31,13 @@ class User extends AbstractModel
      * @param $userName
      * @return bool
      */
-    public function getByUserName($userName) : bool
+    public function getByUserName($username) : bool
     {
-        return $this->dbConnection->query("SELECT * FROM `".self::TABLE."` WHERE username ='".$userName."'")->num_rows == 1;
+        $stmt = $this->dbConnection->prepare("SELECT * FROM `".self::TABLE."` WHERE username = ?");
+        $stmt->bind_param("s",$username);
+        $stmt->execute();
+
+        return $stmt->num_rows();
     }
 
     /**

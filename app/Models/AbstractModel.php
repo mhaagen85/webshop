@@ -7,11 +7,6 @@ use Core\DbConnection;
 abstract class AbstractModel
 {
     /**
-     * @var \mysqli
-     */
-    protected $dbConnection;
-
-    /**
      * Db Connection
      */
     public function __construct()
@@ -28,8 +23,10 @@ abstract class AbstractModel
      */
     public function getAll()
     {
-        $result =  $this->dbConnection->query("SELECT * FROM  `".get_called_class()::TABLE."` ")->fetch_all(MYSQLI_ASSOC);
-        $result == true ?  $this->dbConnection->close() :  $result = "Error getting all records: " . $this->dbConnection->error;
+        $stmt = $this->dbConnection->prepare("SELECT * FROM  `".get_called_class()::TABLE."` ");
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        $result == true ?  $stmt->close() :  $result = "Error getting all records: " . $stmt->error;
 
         return $result;
     }
@@ -53,8 +50,11 @@ abstract class AbstractModel
      */
     public function getById($id)
     {
-        $result = $this->dbConnection->query("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'")->fetch_assoc();
-        $result == true ?  $this->dbConnection->close() :  $result = "Error getting record by ID: " . $this->dbConnection->error;
+        $stmt = $this->dbConnection->prepare("SELECT * FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        $result == true ?  $stmt->close() :  $result = "Error getting record by ID: " . $stmt->error;
 
         return $result;
     }
@@ -76,7 +76,6 @@ abstract class AbstractModel
     {
         $properties = '';
         foreach(get_class_vars(get_called_class()) as $key => $value){
-            if ($key != "dbConnection")
                 $properties = $properties . ',' . $key;
         }
 
