@@ -38,5 +38,6 @@
 *  [REFACTOR] changed place from media + styles *(martijn.vanhaagen@experius.nl)*
 *  [REFACTOR] Added different way of using msqli *(martijn.vanhaagen@experius.nl)*
 *  [REFACTOR] refactored db queries *(martijn.vanhaagen@experius.nl)*
+*  [BUGFIX] Adjusted getUserById statement *(martijn.vanhaagen@experius.nl)*
 
 

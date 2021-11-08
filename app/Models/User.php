@@ -37,7 +37,7 @@ class User extends AbstractModel
         $stmt->bind_param("s",$username);
         $stmt->execute();
 
-        return $stmt->num_rows();
+        return $stmt->get_result()->num_rows;
     }
 
     /**
