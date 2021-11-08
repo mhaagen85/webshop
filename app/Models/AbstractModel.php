@@ -40,10 +40,11 @@ abstract class AbstractModel
      */
     public function delete($id)
     {
-        $result =  $this->dbConnection->query("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = '".$id."'");
-        $result == true ?  $this->dbConnection->close() :  $result = "Error deleting record: " . $this->dbConnection->error;
+        $stmt = $this->dbConnection->prepare("DELETE FROM `".get_called_class()::TABLE."` WHERE `".get_called_class()::ID."` = ?");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
 
-        return $result;
+        return $stmt->affected_rows > 0 ? $stmt->close() : $stmt->error;
     }
 
     /**

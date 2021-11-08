@@ -36,5 +36,6 @@
 *  [FEATURE] Added db constructor *(martijn.vanhaagen@experius.nl)*
 *  [REFACTOR] refactored structure *(martijn.vanhaagen@experius.nl)*
 *  [REFACTOR] changed place from media + styles *(martijn.vanhaagen@experius.nl)*
+*  [REFACTOR] Added different way of using msqli *(martijn.vanhaagen@experius.nl)*
 
 

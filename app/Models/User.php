@@ -7,7 +7,7 @@ class User extends AbstractModel
     CONST TABLE = 'Users';
 
     public string $username;
-    public int $active;
+    public int $active = 1;
     public string $password;
 
     /**
@@ -21,8 +21,10 @@ class User extends AbstractModel
         $this->hashPassword($this->password);
         $properties = $this->getClassProperties();
 
-        return $this->dbConnection->query("INSERT INTO `".self::TABLE."` ($properties) 
-                                            VALUES ('".$this->username."', 1, '".$this->password."')");
+        $stmt = $this->dbConnection->prepare("INSERT INTO `".self::TABLE."` ($properties) VALUES (?, ?, ?)");
+        $stmt->bind_param("sis",$this->username,$this->active,$this->password);
+        $stmt->execute();
+        $stmt->close();
     }
 
     /**

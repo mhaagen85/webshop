@@ -23,12 +23,10 @@ class Product extends AbstractModel
         $this->validateData($postData);
         $properties = $this->getClassProperties();
 
-        return $this->dbConnection->query("
-                    INSERT INTO `".self::TABLE."` (
-                      $properties) 
-                      VALUES (
-                      '".$this->name."', '".$this->price."', '".$this->description."', '".$this->stock."')
-                      ");
+        $stmt = $this->dbConnection->prepare("INSERT INTO `".self::TABLE."` ($properties) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sisi",$this->name,$this->price,$this->description,$this->stock);
+        $stmt->execute();
+        $stmt->close();
     }
 
     /**
@@ -40,14 +38,10 @@ class Product extends AbstractModel
         $id = $postData['product_id'];
         $this->validateData($postData);
 
-        return $this->dbConnection->query("
-                UPDATE `".self::TABLE."` SET 
-                name = '".$this->name."', 
-                price = '".$this->price."',
-                description = '".$this->description."',
-                stock = '".$this->stock."'
-                WHERE product_id = '".id."'
-                ");
+        $stmt = $this->dbConnection->prepare("UPDATE `".self::TABLE."` SET name = ?, price = ?, description = ?, stock = ? WHERE product_id = ?");
+        $stmt->bind_param("sisii",$this->name,$this->price,$this->description,$this->stock, $id);
+        $stmt->execute();
+        $stmt->close();
     }
 
 }
