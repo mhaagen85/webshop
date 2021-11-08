@@ -35,5 +35,6 @@
 *  [BUGFIX] Adjusted logo path *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added db constructor *(martijn.vanhaagen@experius.nl)*
 *  [REFACTOR] refactored structure *(martijn.vanhaagen@experius.nl)*
+*  [REFACTOR] changed place from media + styles *(martijn.vanhaagen@experius.nl)*
 
 
