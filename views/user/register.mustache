@@ -7,6 +7,9 @@
     <div class="field">
        <label class="label">Username</label>
            <input class="input is-primary" type="text" name="username" required minlength="4" maxlength="12">
+           {{# data.error-message}}
+           <div>{{ data.error-message }}</div>
+           {{/ data.error-message}}
     </div>
     <div class="field">
         <label class="label">Password</label>

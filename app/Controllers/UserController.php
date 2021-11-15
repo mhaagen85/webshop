@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\User;
+use Controllers\LoginController;
 
 class UserController extends AbstractController
 {
@@ -12,10 +13,16 @@ class UserController extends AbstractController
     protected $user;
 
     /**
+     * @var \Controllers\LoginController
+     */
+    protected $login;
+
+    /**
      * @param User $user
      */
     public function __construct()
     {
+        $this->login = new LoginController();
         $this->user = new User();
     }
 
@@ -25,7 +32,8 @@ class UserController extends AbstractController
      */
     public function view($path)
     {
-        $this->renderTemplate('user/' . $path, []);
+        $data['template'] = 'user/' . $path;
+        $this->renderTemplate($data);
     }
 
     /**
@@ -38,7 +46,10 @@ class UserController extends AbstractController
             'password' => $_POST['password'],
         ];
 
-        $this->user->create($postData);
-        $this->redirect('/');
+        $insert = $this->user->create($postData);
+        $data['template'] = 'user/register';
+        $data['error-message'] = $insert['message'];
+
+        return $insert['code'] ? $this->login->view($data) : $this->redirect('/');
     }
 }

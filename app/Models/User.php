@@ -13,7 +13,6 @@ class User extends AbstractModel
     /**
      * @param $userName
      * @param $password
-     * @return bool|\mysqli_result
      */
     public function create($postData)
     {
@@ -24,20 +23,52 @@ class User extends AbstractModel
         $stmt = $this->dbConnection->prepare("INSERT INTO `".self::TABLE."` ($properties) VALUES (?, ?, ?)");
         $stmt->bind_param("sis",$this->username,$this->active,$this->password);
         $stmt->execute();
+
+        $insert['code'] =  $stmt->errno;
+        $insert['message'] = $stmt->errno ? $stmt->error : 'success';
         $stmt->close();
+
+        return $insert;
     }
 
     /**
-     * @param $userName
+     * @param $username
      * @return bool
+     * @throws \ErrorException
      */
-    public function getByUserName($username) : bool
+    public function validateUsername($username)
     {
         $stmt = $this->dbConnection->prepare("SELECT * FROM `".self::TABLE."` WHERE username = ?");
         $stmt->bind_param("s",$username);
         $stmt->execute();
 
-        return $stmt->get_result()->num_rows;
+        if ($stmt->get_result()->num_rows == false) {
+            throw new \ErrorException('Username not Found');
+        }
+
+        return true;
+    }
+
+    /**
+     * @return bool
+     * @throws \ErrorException
+     */
+    public function validateUser()
+    {
+        $stmt = $this->dbConnection->prepare("SELECT * FROM `".self::TABLE."` WHERE username = ?");
+        $stmt->bind_param("s",$_POST['username']);
+        $stmt->execute();
+        $user = $stmt->get_result()->fetch_assoc();
+
+        if (!$user) {
+            throw new \ErrorException('Username not Found');
+        }
+
+        if (password_verify($_POST['password'], $user['password']) == false) {
+            throw new \ErrorException('Invalid password.');
+        }
+
+        return true;
     }
 
     /**

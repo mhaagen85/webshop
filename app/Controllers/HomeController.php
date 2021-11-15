@@ -9,7 +9,8 @@ class HomeController extends AbstractController
  */
     public function view($path)
     {
-        $this->renderTemplate($path, []);
+        $data['template'] = $path;
+        $this->renderTemplate($data);
     }
 
 

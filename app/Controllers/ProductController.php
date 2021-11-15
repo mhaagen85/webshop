@@ -36,7 +36,8 @@ class ProductController extends AbstractController
                 break;
         }
 
-        $this->renderTemplate('product/'.$path , $data);
+        $data['template'] = 'product/'. $path;
+        $this->renderTemplate($data);
     }
 
     /**

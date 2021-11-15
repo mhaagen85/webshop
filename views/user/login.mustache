@@ -5,6 +5,11 @@
 <h1 class="title">Login Page</h1>
     <div class="container">
         <form method="POST" action="login-user">
+        {{# data.error-message }}
+        <div class="notification is-danger">
+         {{ data.error-message }}
+        </div>
+        {{/ data.error-message }}
             <div class="field">
               <label class="label">Username</label>
                  <input class="input is-primary" type="text" name="username" placeholder="Username">

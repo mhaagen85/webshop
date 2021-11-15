@@ -12,9 +12,6 @@ class LoginController extends AbstractController
      */
     protected $user;
 
-    /**
-     * @param User $user
-     */
     public function __construct()
     {
         $this->user = new User();
@@ -25,7 +22,8 @@ class LoginController extends AbstractController
      */
     public function view($path)
     {
-        $this->user->isLoggedIn() ? $this->redirect('productlist') : $this->renderTemplate('user/' . $path, []);
+        is_array($path) ? $data = $path : $data['template'] = 'user/' . $path;
+        $this->user->isLoggedIn() ? $this->redirect('productlist') : $this->renderTemplate($data);
     }
 
     /**
@@ -33,9 +31,17 @@ class LoginController extends AbstractController
      */
     public function login()
     {
-        $username = $_POST['username'];
-        // Check if user exist in DB, if not redirect to register
-        $this->user->getByUserName($username) == false ? $this->redirect('register') : $this->user->LoginUser($username);
+        // Validate User
+        try {
+            $this->user->validateUser();
+        } catch (\Exception $e) {
+            $data['template'] = 'user/login';
+            $data['error-message'] = $e->getMessage();
+
+            return $this->view($data);
+        }
+
+        $this->user->LoginUser($_POST['username']);
         $this->redirect('productlist');
     }
 

@@ -1,4 +1,4 @@
-##  (2021-11-08)
+##  (2021-11-15)
 
 [View Release](ssh://git@github.com/mhaagen85/webshop.git/commits/tag/)
 
@@ -41,5 +41,6 @@
 *  [BUGFIX] Adjusted getUserById statement *(martijn.vanhaagen@experius.nl)*
 *  [REFACTOR] Adjusted styling login *(martijn.vanhaagen@experius.nl)*
 *  [REFACTOR] Adjusted form styling *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Added validation for user *(martijn.vanhaagen@experius.nl)*
 
 
