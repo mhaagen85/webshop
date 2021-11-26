@@ -16,6 +16,13 @@ class Autoloader
         } else {
             // Add other classes
             require dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR, $className) . '.php';
+
+            // Other example method
+//            $file = dirname(__DIR__, 1) . '/'  . $className . '.php';
+//            $file = str_replace('\\', DIRECTORY_SEPARATOR, $file);
+//            if (file_exists($file)) {
+//                include $file;
+//            }
         }
     }
 }
