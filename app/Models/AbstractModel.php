@@ -7,6 +7,11 @@ use Core\DbConnection;
 abstract class AbstractModel
 {
     /**
+     * @var \mysqli
+     */
+    protected \mysqli $dbConnection;
+
+    /**
      * Db Connection
      */
     public function __construct()

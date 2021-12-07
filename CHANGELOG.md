@@ -44,5 +44,6 @@
 *  [FEATURE] Added validation for user *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added example autoloader *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added test trait *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Added return type *(martijn.vanhaagen@experius.nl)*
 
 
