@@ -2,9 +2,13 @@
 
 namespace Models;
 
+use Controllers\UserController;
+use Traits\TestTrait;
+
 class User extends AbstractModel
 {
     CONST TABLE = 'Users';
+    use TestTrait;
 
     public string $username;
     public int $active = 1;
