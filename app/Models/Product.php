@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use Core\DbConnection;
+use Core\Database;
 
 class Product extends AbstractModel
 {

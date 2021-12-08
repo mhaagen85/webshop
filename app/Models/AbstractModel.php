@@ -2,7 +2,7 @@
 
 namespace Models;
 
-use Core\DbConnection;
+use Core\Database;
 
 abstract class AbstractModel
 {
@@ -16,7 +16,7 @@ abstract class AbstractModel
      */
     public function __construct()
     {
-        $this->dbConnection = DbConnection::getConn();
+        $this->dbConnection = Database::getConnection();
     }
     /**
      * @return mixed

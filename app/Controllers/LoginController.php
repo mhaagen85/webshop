@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-use Core\DbConnection;
+use Core\Database;
 use Models\User;
 
 class LoginController extends AbstractController

@@ -1,4 +1,4 @@
-##  (2021-12-07)
+##  (2021-12-08)
 
 [View Release](ssh://git@github.com/mhaagen85/webshop.git/commits/tag/)
 
@@ -45,5 +45,6 @@
 *  [FEATURE] Added example autoloader *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added test trait *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added return type *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] Added migrations *(martijn.vanhaagen@experius.nl)*
 
 
