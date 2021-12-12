@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+// require Autoloader
+require_once($_SERVER['DOCUMENT_ROOT'] . 'app/Core/Autoloader.php');
+
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+# add our commands
+$application->add(new Commands\runMIgrations());
+$application->add(new Commands\deleteMigrations());
+
+$application->run();

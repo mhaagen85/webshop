@@ -8,7 +8,7 @@ class m0002_create_products_table
     public function up()
     {
         $db = Database::getConnection();
-        $Sql = "CREATE TABLE IF products(
+        $Sql = "CREATE TABLE products(
                 product_id int NOT NULL AUTO_INCREMENT, 
                 name varchar(255), 
                 price int, 

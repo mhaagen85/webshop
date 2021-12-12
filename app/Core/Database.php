@@ -87,12 +87,29 @@ class Database
         $statement->execute();
     }
 
+    public function deleteMigrations()
+    {
+        $files = array_slice(scandir(dirname(__DIR__, 2) . '/database/migrations'), 2);
+        foreach ($files as $migration) {
+            require_once dirname(__DIR__, 2) . '/database/migrations/' . $migration;
+            $className = pathinfo($migration, PATHINFO_FILENAME);
+            $instance = new $className();
+            $instance->down();
+            $this->log("Deleted migration $migration");
+
+            $statement = $this->db->prepare("TRUNCATE migrations");
+            $statement->execute();
+        }
+
+        return 'Migrations are deleted';
+    }
+
     protected function log($message)
     {
-        if (file_exists('../var/log/') == false){
+        if (file_exists(dirname(__DIR__, 2) . '/var/log') == false){
             mkdir(dirname(__DIR__, 2) . '/var/log', 0777, true);
         }
-        file_put_contents('../var/log/log_' . $this->getCurrentDate() . '.txt',
+        file_put_contents(dirname(__DIR__, 2) . '/var/log/log_' . $this->getCurrentDate() . '.txt',
             PHP_EOL . $this->getCurrentDate() . '-' . $message, FILE_APPEND);
     }
 
