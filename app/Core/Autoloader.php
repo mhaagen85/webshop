@@ -14,8 +14,7 @@ class Autoloader
             $className = 'vendor/' . str_replace("_", "/", $className);
             require dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR,
                     $className) . '.php';
-        }
-        if (strpos($className, 'Symfony') !== false) {
+        } elseif (strpos($className, 'Symfony') !== false) {
             require dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . str_replace('\\', DIRECTORY_SEPARATOR,
                     'vendor/'. $className) . '.php';
         } else {

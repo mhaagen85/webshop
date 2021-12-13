@@ -1,4 +1,4 @@
-##  (2021-12-12)
+##  (2021-12-13)
 
 [View Release](ssh://git@github.com/mhaagen85/webshop.git/commits/tag/)
 
@@ -47,5 +47,6 @@
 *  [FEATURE] Added return type *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added migrations *(martijn.vanhaagen@experius.nl)*
 *  [FEATURE] Added console command + migrations *(martijn.vanhaagen@experius.nl)*
+*  [FEATURE] fixed minor bugs *(martijn.vanhaagen@experius.nl)*
 
 

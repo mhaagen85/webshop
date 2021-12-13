@@ -80,8 +80,10 @@ abstract class AbstractModel
     protected function getClassProperties()
     {
         $properties = '';
-        foreach(get_class_vars(get_called_class()) as $key => $value){
+        foreach(get_class_vars(get_called_class()) as $key => $value) {
+            if ($key != 'dbConnection') {
                 $properties = $properties . ',' . $key;
+            }
         }
 
         return substr($properties, 1);
