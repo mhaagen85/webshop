@@ -9,7 +9,7 @@ class DotEnv
      *
      * @var string
      */
-    protected $path;
+    protected String $path;
 
     /**
      * @param string $path

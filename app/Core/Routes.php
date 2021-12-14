@@ -1,5 +1,9 @@
 <?php
 
+use Core\Router;
+
+$router = new Router();
+
 // Home
 $router->add('/', function() {
     $homeController = new \Controllers\HomeController();

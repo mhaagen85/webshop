@@ -10,16 +10,13 @@ class UserController extends AbstractController
     /**
      * @var User
      */
-    protected $user;
+    protected User $user;
 
     /**
      * @var \Controllers\LoginController
      */
-    protected $login;
+    protected LoginController $login;
 
-    /**
-     * @param User $user
-     */
     public function __construct()
     {
         $this->login = new LoginController();

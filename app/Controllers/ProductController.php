@@ -9,7 +9,7 @@ class ProductController extends AbstractController
     /**
      * @var Product
      */
-    protected $product;
+    protected Product $product;
 
     /**
      * @param Product $product

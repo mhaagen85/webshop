@@ -11,7 +11,7 @@ use Symfony\Component\Console\Question\ConfirmationQuestion;
 use Core\Database;
 
 /**
- * Run migrations command
+ * Delete migrations command
  */
 class deleteMigrations extends Command
 {
@@ -38,7 +38,7 @@ class deleteMigrations extends Command
         if (!$helper->ask($input, $output, $question)) {
             return Command::SUCCESS;
         }
-        // Run Migrations
+        // Delete Migrations
         $db = new Database();
         $db->deleteMigrations();
 

@@ -14,13 +14,18 @@ use Exception;
 
 class Router
 {
-    private $routes = [];
+    /**
+     * @var array
+     */
+    private array $routes = [];
 
     /**
-     * Load the routes 
+     * @param $file
+     * @return static
+     * Load the routes
      * and return and instance of the Router class using "Late Static Binding"
      */
-    public static function load($file)
+    public static function load($file) : router
     {
         $router = New static;
         require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'Core/' . $file;

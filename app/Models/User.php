@@ -15,8 +15,8 @@ class User extends AbstractModel
     public string $password;
 
     /**
-     * @param $userName
-     * @param $password
+     * @param $postData
+     * @return array
      */
     public function create($postData)
     {
@@ -40,7 +40,7 @@ class User extends AbstractModel
      * @return bool
      * @throws \ErrorException
      */
-    public function validateUsername($username)
+    public function validateUsername($username) : bool
     {
         $stmt = $this->dbConnection->prepare("SELECT * FROM `".self::TABLE."` WHERE username = ?");
         $stmt->bind_param("s",$username);
@@ -57,7 +57,7 @@ class User extends AbstractModel
      * @return bool
      * @throws \ErrorException
      */
-    public function validateUser()
+    public function validateUser() : bool
     {
         $stmt = $this->dbConnection->prepare("SELECT * FROM `".self::TABLE."` WHERE username = ?");
         $stmt->bind_param("s",$_POST['username']);

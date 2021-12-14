@@ -69,7 +69,10 @@ class Database
             ->execute();
     }
 
-    protected function getAppliedMigrations()
+    /**
+     * @return array
+     */
+    protected function getAppliedMigrations() : array
     {
         $statement = $this->db->prepare("SELECT migration FROM migrations");
         $statement->execute();
@@ -87,7 +90,10 @@ class Database
         $statement->execute();
     }
 
-    public function deleteMigrations()
+    /**
+     * @return string
+     */
+    public function deleteMigrations() : string
     {
         $files = array_slice(scandir(dirname(__DIR__, 2) . '/database/migrations'), 2);
         foreach ($files as $migration) {

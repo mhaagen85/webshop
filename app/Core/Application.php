@@ -11,19 +11,16 @@ class Application
      * 
      * @var Request
      */
-    protected $request;
+    protected Request $request;
 
     /**
      * 
      * @var Router
      */
-    protected $router;
+    protected Router $router;
 
     /**
-     * 
-     * @param Request $request 
-     * @param Router $router 
-     * @return void 
+     * @param \Core\Request $request
      */
     public function __construct(
         Request $request
@@ -32,10 +29,9 @@ class Application
         $this->request = $request;
         $this->router = Router::load('Routes.php');
     }
-    
+
     /**
-     * 
-     * @return void 
+     * @throws \Exception
      */
     public function run()
     {

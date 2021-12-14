@@ -10,7 +10,7 @@ class LoginController extends AbstractController
     /**
      * @var User
      */
-    protected $user;
+    protected User $user;
 
     public function __construct()
     {

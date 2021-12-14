@@ -16,7 +16,7 @@ class Product extends AbstractModel
 
     /**
      * @param $postData
-     * @return bool|\mysqli_result
+     * @return mixed|void
      */
     public function create($postData)
     {
@@ -31,7 +31,6 @@ class Product extends AbstractModel
 
     /**
      * @param $postData
-     * @return bool|\mysqli_result
      */
     public function update($postData)
     {
