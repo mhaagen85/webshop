@@ -10,3 +10,5 @@ Simple framework with:
 - DB Connection
 - Templating Engine : Mustache
 - CSS framework : Bulma
+- Added console migration command
+- Added migrations
