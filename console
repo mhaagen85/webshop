@@ -8,7 +8,7 @@ use Symfony\Component\Console\Application;
 $application = new Application();
 
 # add our commands
-$application->add(new Commands\runMIgrations());
+$application->add(new Commands\runMigrations());
 $application->add(new Commands\deleteMigrations());
 
 $application->run();
